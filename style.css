@@ -7,3 +7,50 @@ body{
    display: block;
    margin: 0 auto;
 }
+
+.popap {
+   background-color: green;
+   position: absolute;
+   top: 30%;
+   left: 33.7%;
+   width: 500px;
+   height: 300px;
+   text-align: center;
+   border-radius: 20px;
+   display: none;
+}
+.popap__contant {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+
+   }
+
+.popap__title {
+   font-size: 50px;
+   font-weight: 700;
+
+   }
+
+.popap__score {
+   font-size: 25px;
+   }
+
+.popap__record {
+   font-size: 15px;
+   font-style: italic;
+   }
+
+.popap__btn button{
+   background-color: rgb(69, 109, 51);
+   border: none;
+   padding: 15px 50px;
+   border-radius: 10px;
+   font-weight: 700;
+   color: #fff;
+   cursor: pointer;
+   }
+

@@ -1,6 +1,14 @@
 const canvas = document.querySelector('#canvas')
 const context = canvas.getContext('2d')
 
+let popap = document.querySelector('#popap')
+let scoreInfo = document.querySelector('#score')
+let recordInfo = document.querySelector('#record')
+let btnRestart = document.querySelector('#btn-restart')
+
+btnRestart.addEventListener('click', function(){
+   location.reload()
+})
 let bg = new Image()
 let foodImg = new Image()
 
@@ -9,6 +17,13 @@ foodImg.src = 'img/food.png'
 
 let score = 0
 let box = 32
+let record = 0
+
+if(localStorage.getItem('record') > 0){
+   record = localStorage.getItem('record')
+}else{
+   record = 0
+}
 
 let foodXY = {
    x: Math.floor((Math.random() * 17 + 1) ) * box,
@@ -40,6 +55,7 @@ function move(e) {
 function eatTail(head, array)  {
    for (let i = 0; i < array.length; i++) {
       if(head.x == array[i].x && head.y == array[i].y ){
+         popap.style.display = 'block'
          clearInterval(game)
       }
    }
@@ -52,6 +68,9 @@ function draw() {
    context.font = '50px Arial'
    context.fillText(score, box * 2, box * 1.7)
 
+   context.fillStyle = 'white'
+   context.font = '20px Arial'
+   context.fillText('Record:' + record, box * 14, box * 1.4)
 
  
 
@@ -65,6 +84,15 @@ function draw() {
 
    if(snake[0].x == foodXY.x && snake[0].y == foodXY.y){
       score++
+
+      if(score > localStorage.getItem('record')){
+         record = score
+         localStorage.setItem('record', record)
+
+      }
+      
+
+
       foodXY = {
          x: Math.floor((Math.random() * 17 + 1) ) * box,
          y: Math.floor((Math.random() * 15 + 3) ) * box 
@@ -74,6 +102,9 @@ function draw() {
    }
 
    if(snakeX < box || snakeX > box * 17 || snakeY < box * 3 || snakeY > box * 17  ){
+      popap.style.display = 'block'
+      scoreInfo.textContent = 'SCORE:' + score
+      recordInfo.textContent = 'RECORD:' + record
       clearInterval(game)
    }
 
